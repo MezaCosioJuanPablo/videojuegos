@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameZone - Acerca de</title>
+    <!-- Vinculación del archivo CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.home') }}">Inicio</a></li>
+          <li><a href="{{ url_for('main.contact') }}">Contacto</a></li>
+          <li><a href="{{ url_for('main.about') }}">Acerca de</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="about">
+        <h1>Acerca de GameZone</h1>
+        <img
+          src="{{ url_for('static', filename='imagen/tienda.jpg') }}"
+          alt="Nuestra tienda GameZone"
+          class="about-image"
+        />
+        <p>
+          En <strong>GameZone</strong>, somos apasionados de los videojuegos y
+          entendemos lo que significa disfrutar de una gran partida. Nuestra
+          misión principal es ofrecerte los mejores títulos, consolas de última
+          generación y accesorios indispensables para que lleves tu experiencia
+          gamer al siguiente nivel.
+        </p>
+        <p>
+          Fundada en 2025, GameZone nació del amor por los videojuegos y la
+          necesidad de crear un espacio donde los gamers puedan encontrar todo
+          lo que necesitan. Desde nuestros inicios, hemos trabajado para
+          construir una comunidad vibrante de jugadores, ofreciendo no solo
+          productos de calidad, sino también un servicio excepcional.
+        </p>
+        <p>
+          En GameZone, creemos en los valores de <strong>innovación</strong>,
+          <strong>pasión</strong> y <strong>calidad</strong>. Nos esforzamos
+          cada día por brindarte lo mejor, desde lanzamientos exclusivos hasta
+          ofertas imperdibles. Nuestra visión es convertirnos en el destino
+          número uno para los gamers en todo México y, algún día, en el resto
+          del mundo.
+        </p>
+        <p>
+          Además, nos enorgullece ser parte de la industria de los videojuegos,
+          una industria que conecta a personas de todas las edades y culturas.
+          Queremos seguir creciendo contigo y ofrecerte siempre las mejores
+          experiencias, tanto dentro como fuera de las pantallas.
+        </p>
+        <p>
+          ¡Gracias por ser parte de esta aventura! En GameZone, siempre
+          encontrarás un hogar para tus pasiones gamers.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 GameZone - Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

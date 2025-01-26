@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameZone - Contacto</title>
+    <!-- Vinculación del archivo CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.home') }}">Inicio</a></li>
+          <li><a href="{{ url_for('main.contact') }}">Contacto</a></li>
+          <li><a href="{{ url_for('main.about') }}">Acerca de</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="contact">
+        <h1>Contáctanos</h1>
+        <p>
+          ¿Tienes alguna pregunta o necesitas ayuda? ¡Estamos aquí para ti!
+          Puedes comunicarte con nosotros a través de los siguientes medios:
+        </p>
+        <ul>
+          <li>📧 Email: soporte@gamezone.com</li>
+          <li>📞 Teléfono: +52 744 123 4567</li>
+          <li>🏢 Dirección: Av. Gamer 101, Acapulco, México</li>
+        </ul>
+        <!-- Formulario de contacto -->
+        <h2>Envíanos un mensaje</h2>
+        <form action="{{ url_for('main.contact') }}" method="POST">
+          <label for="name">Nombre:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Tu nombre"
+            required
+          />
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Tu email"
+            required
+          />
+          <label for="message">Mensaje:</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Escribe tu mensaje aquí"
+            required
+          ></textarea>
+          <button type="submit" class="button">Enviar</button>
+        </form>
+        {% if request.method == "POST" %}
+        <p class="confirmation">
+          ¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto
+          contigo pronto.
+        </p>
+        {% endif %}
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 GameZone - Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

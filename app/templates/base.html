@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameZone - Base</title>
+    <!-- Vinculación del archivo CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a class="button" href="{{ url_for('main.home') }}">Inicio</a>
+          </li>
+          <li>
+            <a class="button" href="{{ url_for('main.contact') }}">Contacto</a>
+          </li>
+          <li>
+            <a class="button" href="{{ url_for('main.base') }}">Base</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="info">
+        <h1>Conoce más sobre GameZone</h1>
+        <p>
+          En <strong>GameZone</strong>, nuestra misión es ofrecer a los gamers
+          los mejores videojuegos, consolas de última generación y accesorios
+          imprescindibles para disfrutar al máximo de cada partida.
+        </p>
+      </section>
+      <section class="services">
+        <h2>¿Por qué elegirnos?</h2>
+        <ul>
+          <li>🎮 Variedad de videojuegos para todas las plataformas.</li>
+          <li>🚀 Envíos rápidos a cualquier lugar de México.</li>
+          <li>💸 Precios competitivos y ofertas exclusivas.</li>
+          <li>📞 Soporte personalizado para nuestros clientes.</li>
+        </ul>
+      </section>
+      <section class="promo">
+        <h2>¡Aprovecha nuestras promociones exclusivas!</h2>
+        <p>
+          Visita nuestra tienda y descubre descuentos en tus juegos favoritos,
+          solo por tiempo limitado.
+        </p>
+        <a href="{{ url_for('main.home') }}" class="button">Ver ofertas</a>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 GameZone - Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>
