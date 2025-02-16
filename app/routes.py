@@ -1,50 +1,70 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for
+from app import db
+from app.models import Kevin
 
 # Crea un blueprint para organizar las rutas
 main = Blueprint('main', __name__)
 
-# Ruta para la página web principal
+# Página web principal
 @main.route('/')
 def home():
-    return render_template('index.html')
+    kevin_list = Kevin.query.all()
+    return render_template('index.html', kevin_list=kevin_list)
 
-# Ruta para la API de saludo
+@main.route('/formulario')
+def formulario():
+    kevin_list = Kevin.query.all()
+    return render_template('formulario.html', kevin_list=kevin_list)
+
+# API básica de saludo
 @main.route('/api/greet', methods=['GET'])
 def greet():
     return jsonify({"message": "Hello, welcome to my API!"})
 
-# Ruta para la API de UNID
-@main.route('/api/unid', methods=['GET'])
+# API con información de la UNID
+@main.route("/api/unid", methods=["GET"])
 def unid():
-    return jsonify(
-        {
-           "name": "Universidad Interamericana para el Desarrollo",
-           "acronym": "UNID",
-           "city": "Acapulco City",
-           "country": "Mexico"
-        }
-    )
+    return jsonify({
+        "name": "Universidad Interamericana para el Desarrollo",
+        "acronym": "UNID",
+        "city": "Acapulco City",
+        "country": "Mexico"
+    })
 
-# Ruta para la página "Base"
-@main.route('/base')
-def base():
-    return render_template('base.html')
+# 🟢 API para listar registros de la tabla `kevin`
+@main.route("/api/kevin", methods=["GET"])
+def get_kevin():
+    kevin_list = Kevin.query.all()
+    return jsonify([{
+        "id": k.id,
+        "nombre": k.nombre,
+        "apellidos": k.apellidos,
+        "telefono": k.telefono
+    } for k in kevin_list])
 
-# Ruta para la página de "Contacto"
-@main.route('/contact', methods=['GET', 'POST'])
-def contact():
-    if request.method == 'POST':
-        # Obtener los datos del formulario
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
-        # Puedes realizar alguna acción con los datos, como almacenarlos o enviarlos por email
-        print(f"Mensaje recibido de {name} ({email}): {message}")
-        # Redirigir con un mensaje de confirmación
-        return render_template('contact.html', confirmation=True)
-    return render_template('contact.html', confirmation=False)
+# 🔵 API para agregar un nuevo registro
+@main.route("/api/kevin/add", methods=["POST"])
+def add_kevin():
+    nombre = request.form.get('nombre')
+    apellidos = request.form.get('apellidos')
+    telefono = request.form.get('telefono')
 
-# Ruta para la página "Acerca de"
-@main.route('/about')
-def about():
-    return render_template('about.html')
+    if not nombre or not apellidos or not telefono:
+        return "Error: Todos los campos son obligatorios", 400
+
+    new_entry = Kevin(nombre=nombre, apellidos=apellidos, telefono=telefono)
+    db.session.add(new_entry)
+    db.session.commit()
+
+    return redirect(url_for('main.home'))
+
+# 🔴 API para eliminar un registro
+@main.route("/api/kevin/delete/<string:id>", methods=["POST"])
+def delete_kevin(id):
+    entry = Kevin.query.get(id)
+    if entry:
+        db.session.delete(entry)
+        db.session.commit()
+        return redirect(url_for('main.home'))
+
+    return jsonify({"error": "Usuario no encontrado"}), 404
